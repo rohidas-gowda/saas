@@ -4,10 +4,11 @@ import { signRequestForUpload } from '../aws-s3';
 
 const router = express.Router();
 
+// Get signed request from AWS S3 server
 router.post('/aws/get-signed-request-for-upload-to-s3', async (req, res, next) => {
-  console.log(req.body);
   try {
     const { fileName, fileType, prefix, bucket } = req.body;
+
     const returnData = await signRequestForUpload({
       fileName,
       fileType,

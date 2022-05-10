@@ -17,9 +17,6 @@ async function signRequestForUpload({ fileName, fileType, prefix, bucket }) {
     ACL: acl,
   };
 
-  console.log('aws-s3');
-  console.log(prefix);
-
   const s3 = new aws.S3({
     apiVersion: 'latest',
     region: process.env.AWS_REGION,

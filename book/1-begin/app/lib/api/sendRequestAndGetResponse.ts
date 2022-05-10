@@ -18,13 +18,12 @@ export default async function sendRequestAndGetResponse(path, opts: any = {}) {
 
   const qs = opts.qs || '';
 
-  console.log(opts.body);
   const response = await fetch(
     opts.externalServer ? `${path}${qs}` : `${process.env.URL_API}${path}${qs}`,
     Object.assign({ method: 'POST', credentials: 'include' }, opts, { headers }),
   );
 
-  console.log(response.status);
+  //console.log(response.status);
   // console.log(response.statusText);
 
   const text = await response.text();

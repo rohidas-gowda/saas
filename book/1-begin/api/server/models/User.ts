@@ -52,10 +52,11 @@ class UserClass extends mongoose.Model {
 
   public static async updateProfile({ userId, name, avatarUrl }) {
     console.log('Static method: updateProfile');
+    console.log('user-log');
+    console.log(userId, avatarUrl, name);
     const user = await this.findById(userId, 'slug displayName');
 
     const modifier = { displayName: user.displayName, avatarUrl, slug: user.slug };
-    console.log(user.slug);
 
     if (name !== user.displayName) {
       modifier.displayName = name;

@@ -12,7 +12,7 @@ import {
   getSignedRequestForUploadApiMethod,
   uploadFileUsingSignedPutRequestApiMethod,
 } from '../lib/api/team-member';
-// import { resizeImage } from '../lib/resizeImage';
+import { resizeImage } from '../lib/resizeImage';
 
 import notify from '../lib/notify';
 
@@ -28,9 +28,6 @@ class YourSettings extends React.Component<Props, State> {
     const slug = 'team-builder-book';
 
     const user = await getUserBySlugApiMethod(slug);
-
-    console.log(user);
-
     return { ...user };
   }
 
@@ -47,6 +44,9 @@ class YourSettings extends React.Component<Props, State> {
   public render() {
     const { user } = this.props;
     const { newName, newAvatarUrl } = this.state;
+
+    console.log('Data of state');
+    console.log(newAvatarUrl);
 
     return (
       <Layout {...this.props}>
@@ -135,8 +135,6 @@ class YourSettings extends React.Component<Props, State> {
 
     const { newName, newAvatarUrl } = this.state;
 
-    console.log(newName);
-
     if (!newName) {
       notify('Name is required');
       return;
@@ -161,7 +159,6 @@ class YourSettings extends React.Component<Props, State> {
   };
 
   private uploadFile = async () => {
-    console.log('upload file opened');
     const fileElement = document.getElementById('upload-file-user-avatar') as HTMLFormElement;
     const file = fileElement.files[0];
 
@@ -174,6 +171,7 @@ class YourSettings extends React.Component<Props, State> {
     const fileType = file.type;
 
     NProgress.start();
+    console.log('reset');
     this.setState({ disabled: true });
 
     const bucket = process.env.BUCKET_FOR_AVATARS;
@@ -187,6 +185,8 @@ class YourSettings extends React.Component<Props, State> {
         prefix,
         bucket,
       });
+
+      const resizedFile = await resizeImage(file, 128, 128);
 
       await uploadFileUsingSignedPutRequestApiMethod(
         file,
@@ -209,6 +209,8 @@ class YourSettings extends React.Component<Props, State> {
     } catch (error) {
       notify(error);
     } finally {
+      console.log('final end data');
+      console.log(this.state.newAvatarUrl);
       fileElement.value = '';
       this.setState({ disabled: false });
       NProgress.done();

@@ -8,7 +8,6 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins: ['prettier', 'react'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -18,6 +17,7 @@ module.exports = {
         arrowParens: 'always',
         printWidth: 100,
         semi: true,
+        endOfLine: 'auto',
       },
     ],
     '@typescript-eslint/camelcase': 'off',
@@ -28,4 +28,5 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
+  plugins: ['prettier', 'react'],
 };

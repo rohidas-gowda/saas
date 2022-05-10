@@ -1,11 +1,13 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  extends: ["plugin:@typescript-eslint/recommended", "prettier"],
-  env: {
-    "es6": true,
-    "node": true,
+  settings: {
+    react: { version: 'detect' },
   },
-  plugins: ["prettier"],
+  parser: '@typescript-eslint/parser',
+  extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  env: {
+    es6: true,
+    node: true,
+  },
   rules: {
     'prettier/prettier': [
       'error',
@@ -15,12 +17,16 @@ module.exports = {
         arrowParens: 'always',
         printWidth: 100,
         semi: true,
+        endOfLine: 'auto',
       },
     ],
-    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    'react/no-unescaped-entities': 'off',
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
     '@typescript-eslint/no-explicit-any': 'off',
     'prefer-arrow-callback': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
- },
-}
+  },
+  plugins: ['prettier', 'react'],
+};

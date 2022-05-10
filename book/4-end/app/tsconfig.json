@@ -10,9 +10,9 @@
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "removeComments": true,
+    "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "typeRoots": [
@@ -20,14 +20,15 @@
     ],
     "lib": [
       "dom",
-      "es2017"
+      "es2021"
     ],
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
@@ -41,5 +42,5 @@
     "out",
     "next.config.js",
     "node_modules"
-  ],
+  ]
 }
