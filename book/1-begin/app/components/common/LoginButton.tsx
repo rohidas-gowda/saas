@@ -13,8 +13,8 @@ class LoginButton extends React.Component {
           <img
             src="https://storage.googleapis.com/async-await-all/G.svg"
             alt="Log in with Google"
-          />
-          Log in with Google
+          />&nbsp;
+              Log in with Google
         </Button>
         <p />
         <br />

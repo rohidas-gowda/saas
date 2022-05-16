@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.post('/get-user-by-slug', async (req, res, next) => {
   console.log('Express route: /get-user-by-slug');
-  console.log(req.body);
+
+  req.session.foo = "bar";
 
   try {
     const { slug } = req.body;

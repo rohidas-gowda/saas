@@ -1,6 +1,8 @@
+import * as mongoSessionStore from 'connect-mongo';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as mongoose from 'mongoose';
+import * as session from 'express-session';
 
 import api from './api';
 import env = require('dotenv');
@@ -18,6 +20,24 @@ server.use(
 );
 
 server.use(express.json());
+
+const MongoStore = mongoSessionStore(session);
+
+const sessionOptions = {
+  name: process.env.SESSION_NAME,
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 14 * 24 * 60 * 60, // save session 14 days
+    autoRemove: 'interval',
+    autoRemoveInterval: 1440, // clears every day
+  }),
+};
+
+const sessionMiddleware = session(sessionOptions);
+server.use(sessionMiddleware);
 
 api(server);
 

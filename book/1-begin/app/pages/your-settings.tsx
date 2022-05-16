@@ -28,6 +28,7 @@ class YourSettings extends React.Component<Props, State> {
     const slug = 'team-builder-book';
 
     const user = await getUserBySlugApiMethod(slug);
+    console.log(user);
     return { ...user };
   }
 

@@ -208,6 +208,8 @@ class YourSettings extends React.Component<Props, State> {
         avatarUrl: this.state.newAvatarUrl,
       });
 
+      console.log(this.state.newAvatarUrl);
+
       notify('You successfully uploaded new avatar.');
     } catch (error) {
       notify(error);
