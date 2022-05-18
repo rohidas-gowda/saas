@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import Layout from '../components/layout';
 
-import { getUserBySlugApiMethod, updateProfileApiMethod } from '../lib/api/public';
+import { getUserApiMethod, updateProfileApiMethod } from '../lib/api/public';
 import {
   getSignedRequestForUploadApiMethod,
   uploadFileUsingSignedPutRequestApiMethod,
@@ -24,10 +24,8 @@ type Props = {
 type State = { newName: string; newAvatarUrl: string; disabled: boolean };
 
 class YourSettings extends React.Component<Props, State> {
-  public static async getInitialProps() {
-    const slug = 'team-builder-book';
-
-    const user = await getUserBySlugApiMethod(slug);
+  public static async getInitialProps(ctx) {
+    const user = await getUserApiMethod(ctx.req);
     console.log(user);
     return { ...user };
   }

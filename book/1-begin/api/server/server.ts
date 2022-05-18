@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as mongoose from 'mongoose';
 import * as session from 'express-session';
+import { setupGoogle } from './google-auth';
 
 import api from './api';
 import env = require('dotenv');
@@ -34,10 +35,17 @@ const sessionOptions = {
     autoRemove: 'interval',
     autoRemoveInterval: 1440, // clears every day
   }),
+  cookie: {
+    httpOnly: true,
+    maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+    secure: false,
+  },
 };
 
 const sessionMiddleware = session(sessionOptions);
 server.use(sessionMiddleware);
+
+setupGoogle({ server });
 
 api(server);
 

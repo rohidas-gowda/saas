@@ -4,10 +4,15 @@ import User from '../models/User';
 
 const router = express.Router();
 
+router.get('/get-user', (req, res) => {
+  res.json({ user: req.user || null });
+});
+
 router.post('/get-user-by-slug', async (req, res, next) => {
   console.log('Express route: /get-user-by-slug');
 
-  req.session.foo = "bar";
+  //@ts-ignore
+  //req.session.foo = "bar";
 
   try {
     const { slug } = req.body;
